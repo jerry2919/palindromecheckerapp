@@ -1,16 +1,19 @@
-public class PalindromeCheckerApp {
-    private static final String App_Name="Palindrome Checker App";
-    private static final String Version="1.0.0";
-
+public class PalindromeCheckerApp{
     public static void main(String[] args){
-        System.out.println("===========================================");
-        System.out.println("           "+App_Name);
-        System.out.println("           version"+Version);
-        System.out.println("===========================================");
-        System.out.println("Welcome to palindrome chcker");
-        System.out.println("This Application Checks weather a given string is palindrome.");
-        System.out.println();
-        System.out.println(" Application Started Successfully:");
+
+        String input="madam";
+        boolean ispalindrome=true;
+
+
+        for(int i= 0; i < input.length() /2; i++){
+
+            if(input.charAt(i) != input.charAt(input.length() -1-i)){
+                ispalindrome = false;
+                break;
+            }
+        }
+        System.out.println("Input text:"+input);
+        System.out.println("is it a palindrome?:" +ispalindrome);
 
     }
 }
