@@ -1,28 +1,26 @@
 import java.util.Stack;
 import java.util.Scanner;
 
-
-
+/* MAIN CLASS */
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         System.out.print("Input: ");
-        String input = scanner.nextLine();
+        String input = sc.nextLine();
 
-        // Inject strategy
+
         PalindromeStrategy strategy = new StackStrategy();
 
         boolean result = strategy.check(input);
 
         System.out.println("Is Palindrome?: " + result);
 
-        scanner.close();
+        sc.close();
     }
 }
-
 
 
 interface PalindromeStrategy {
@@ -30,21 +28,21 @@ interface PalindromeStrategy {
     boolean check(String input);
 }
 
-
-
+/
 class StackStrategy implements PalindromeStrategy {
 
     public boolean check(String input) {
 
         Stack<Character> stack = new Stack<>();
 
-
+        // push characters
         for (char c : input.toCharArray()) {
             stack.push(c);
         }
 
-
+        // compare characters
         for (char c : input.toCharArray()) {
+
             if (c != stack.pop()) {
                 return false;
             }
