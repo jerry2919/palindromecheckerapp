@@ -1,4 +1,7 @@
+import java.util.Stack;
 import java.util.Scanner;
+
+
 
 public class PalindromeCheckerApp {
 
@@ -9,22 +12,44 @@ public class PalindromeCheckerApp {
         System.out.print("Input: ");
         String input = scanner.nextLine();
 
-        // Normalize string
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        // Inject strategy
+        PalindromeStrategy strategy = new StackStrategy();
 
-        boolean isPalindrome = true;
+        boolean result = strategy.check(input);
 
-        // Compare characters from both ends
-        for (int i = 0; i < normalized.length() / 2; i++) {
+        System.out.println("Is Palindrome?: " + result);
 
-            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
+        scanner.close();
+    }
+}
+
+
+
+interface PalindromeStrategy {
+
+    boolean check(String input);
+}
+
+
+
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        Stack<Character> stack = new Stack<>();
+
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
             }
         }
 
-        System.out.println("Is Palindrome?: " + isPalindrome);
-
-        scanner.close();
+        return true;
     }
 }
