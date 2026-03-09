@@ -1,7 +1,5 @@
-import java.util.Stack;
 import java.util.Scanner;
 
-/* MAIN CLASS */
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
@@ -12,40 +10,34 @@ public class PalindromeCheckerApp {
         String input = sc.nextLine();
 
 
-        PalindromeStrategy strategy = new StackStrategy();
+        long startTime = System.nanoTime();
 
-        boolean result = strategy.check(input);
+        boolean result = isPalindrome(input);
+
+
+        long endTime = System.nanoTime();
+
+        long executionTime = endTime - startTime;
 
         System.out.println("Is Palindrome?: " + result);
+        System.out.println("Execution Time: " + executionTime + " ns");
 
         sc.close();
     }
-}
 
+    public static boolean isPalindrome(String str) {
 
-interface PalindromeStrategy {
+        int left = 0;
+        int right = str.length() - 1;
 
-    boolean check(String input);
-}
+        while (left < right) {
 
-/
-class StackStrategy implements PalindromeStrategy {
-
-    public boolean check(String input) {
-
-        Stack<Character> stack = new Stack<>();
-
-        // push characters
-        for (char c : input.toCharArray()) {
-            stack.push(c);
-        }
-
-        // compare characters
-        for (char c : input.toCharArray()) {
-
-            if (c != stack.pop()) {
+            if (str.charAt(left) != str.charAt(right)) {
                 return false;
             }
+
+            left++;
+            right--;
         }
 
         return true;
